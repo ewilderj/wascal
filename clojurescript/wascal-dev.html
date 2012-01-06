@@ -10,23 +10,32 @@
       pre { background: #eeeeee; padding: 1em; border: 1px solid black;}
       #input_form { background: #eeeeff; margin: 0; padding: 1em; border: 1px solid black;}
       label { font-weight: bold; font-size: 90%; }
+      textarea { font-family: monospace; }
     </style>
   </head>
   <body>
 
     <h3>Wascal Demo</h3>
     <p><a href="https://github.com/edumbill/wascal">Source code</a></p>
+    <p>Inspired by Matt Might's
+    <a href="http://matt.might.net/articles/shell-scripts-for-passive-voice-weasel-words-duplicates/">writing 
+    quality scripts</a>, this demo
+    implements his checks in ClojureScript. Paste some writing into the
+    box below and hit the button.</p>
     <h3>Source</h3>
-    <div id="source">
-      The best thing about being given text to analyze is is
-      that it can contain errors.
-    </div>
+    <p>Put your text in here</p>
+    <form id="theform">
+      <textarea cols="60" rows="5" id="source">It was found that false positives were
+were seen to have been surprisingly low.</textarea>
+      <br />
+      <input type="submit" id="go" value="Find errors" />
+    </form>
     <h3>Results</h3>
     <div id="results">
     </div>
     <script>
+      wascal.setup_demo();
       wascal.connectrepl();
-      alert(wascal.greet("ClojureScript"));
     </script>
   </body>
 </html>

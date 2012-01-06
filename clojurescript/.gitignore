@@ -7,3 +7,4 @@ pom.xml
 out/
 .repl
 .DS_Store
+wascal.js

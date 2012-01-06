@@ -1,6 +1,8 @@
 (ns wascal
   (:require [clojure.browser.repl :as repl]
-            [clojure.string :as string]))
+            [clojure.string :as string]
+            [goog.dom :as dom]
+))
 
 ;; with thanks to https://github.com/bnbeckwith/writegood-mode
 
@@ -52,9 +54,14 @@
   (repl/repl env)
   ;; then
   (ns wascal
-  (:require [clojure.browser.repl :as repl]
-            [clojure.string :as string]))
-)
+    (:require [clojure.browser.repl :as repl]
+              [clojure.string :as string]
+              [goog.dom :as dom]
+              [goog.object :as goog-object]
+              [goog.events.EventType :as goog-event-type]
+              ))
+  ;;
+  )
 
 (def weasel-words-regex
   (js/RegExp. (str "(" (string/join "|" weasel-words) ")") "igm"))
@@ -75,3 +82,31 @@
         [passive-voice-regex
          weasel-words-regex
          duplicate-word-regex])))
+
+;;;;
+
+(defn make-error-list [probs]
+  (let [ul (dom/createDom "ul")
+        items (map #(dom/createDom "li" nil (dom/createTextNode %1))
+                   probs)]
+    (doseq [item items]
+      (dom/appendChild ul item))
+    ul))
+
+(defn ^:export demo-find-problems []
+  (let [probs (find-problems
+               (.value (dom/getElement "source")))
+        results (dom/getElement "results")]
+    (if (empty? probs)
+      (dom/setTextContent results "No errors found.")
+      (do (dom/removeChildren results)
+          (dom/appendChild results (make-error-list probs)))
+      )
+    ))
+
+(defn ^:export setup-demo []
+  (goog.events/listen (dom/getElement "theform")
+                      goog.events.EventType/SUBMIT
+                      (fn [e]
+                        (. e (preventDefault))
+                        (demo-find-problems))))

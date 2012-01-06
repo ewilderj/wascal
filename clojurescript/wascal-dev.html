@@ -1,0 +1,32 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head><title>Wascally Wabbits</title>
+    <script type="text/javascript" src="out/goog/base.js"></script>
+    <script type="text/javascript" src="wascal.js"></script>
+    <script type="text/javascript">
+      goog.require('wascal');
+    </script>
+    <style type="text/css">
+      body { font-size: 10pt; font-family: Arial,Helvetica,sans-serif; }
+      pre { background: #eeeeee; padding: 1em; border: 1px solid black;}
+      #input_form { background: #eeeeff; margin: 0; padding: 1em; border: 1px solid black;}
+      label { font-weight: bold; font-size: 90%; }
+    </style>
+  </head>
+  <body>
+
+    <h3>Wascal Demo</h3>
+    <p><a href="https://github.com/edumbill/wascal">Source code</a></p>
+    <h3>Source</h3>
+    <div id="source">
+      The best thing about being given text to analyze is is
+      that it can contain errors.
+    </div>
+    <h3>Results</h3>
+    <div id="results">
+    </div>
+    <script>
+      wascal.connectrepl();
+      alert(wascal.greet("ClojureScript"));
+    </script>
+  </body>
+</html>

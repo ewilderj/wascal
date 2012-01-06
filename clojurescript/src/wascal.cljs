@@ -50,11 +50,11 @@
   (require '[cljs.repl.browser :as browser])
   (def env (browser/repl-env))
   (repl/repl env)
-  ;;
+  ;; then
+  (ns wascal
+  (:require [clojure.browser.repl :as repl]
+            [clojure.string :as string]))
 )
-
-(defn ^:export greet [n]
-  (str "Hello " n))
 
 (def weasel-words-regex
   (js/RegExp. (str "(" (string/join "|" weasel-words) ")") "igm"))
@@ -66,3 +66,12 @@
 
 (def duplicate-word-regex
   (js/RegExp. "(\\w+)\\b\\s*\\1" "igm"))
+
+(defn all-first-matches [regex s]
+  (map first (re-seq regex s)))
+
+(defn ^:export find-problems [s]
+  (flatten (map #(all-first-matches %1 s)
+        [passive-voice-regex
+         weasel-words-regex
+         duplicate-word-regex])))

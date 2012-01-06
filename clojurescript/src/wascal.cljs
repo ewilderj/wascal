@@ -83,7 +83,7 @@
          weasel-words-regex
          duplicate-word-regex])))
 
-;;;;
+;; UI stuff
 
 (defn make-error-list [probs]
   (let [ul (dom/createDom "ul")

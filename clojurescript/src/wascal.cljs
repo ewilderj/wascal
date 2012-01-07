@@ -70,7 +70,7 @@
                    ")\\b") "igm"))
 
 (def duplicate-word-regex
-  (js/RegExp. "\\b(\\w+)\\b\\s*\\b\\1" "igm"))
+  (js/RegExp. "\\b(\\w+)\\b\\s*\\b\\1\\b" "igm"))
 
 (defn all-first-matches [regex s]
   (map first (re-seq regex s)))

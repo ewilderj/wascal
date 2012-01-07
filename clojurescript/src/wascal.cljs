@@ -57,8 +57,6 @@
     (:require [clojure.browser.repl :as repl]
               [clojure.string :as string]
               [goog.dom :as dom]
-              [goog.object :as goog-object]
-              [goog.events.EventType :as goog-event-type]
               ))
   ;;
   )
@@ -72,7 +70,7 @@
                    ")\\b") "igm"))
 
 (def duplicate-word-regex
-  (js/RegExp. "(\\w+)\\b\\s*\\1" "igm"))
+  (js/RegExp. "\\b(\\w+)\\b\\s*\\b\\1" "igm"))
 
 (defn all-first-matches [regex s]
   (map first (re-seq regex s)))
